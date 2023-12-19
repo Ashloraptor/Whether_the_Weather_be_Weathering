@@ -1,0 +1,19 @@
+html {
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+  }
+
+.weather-header {
+    font-size: xx-large;
+}
+
+button {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
