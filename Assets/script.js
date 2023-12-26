@@ -4,6 +4,16 @@ var weatherAPIRootUrl = "https://api.openweathermap.org/data/2.5/weather";
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
 var searchForm = document.getElementById("search-form");
 var searchInput = document.getElementById("search-input");
+//Calls on DOM element
+var rootEl = $('#root');
+//Create a button from searched locations
+var searchEl = $('<button/>');
+//Put searched city name in button
+searchEl.text('test');
+
+//Append the search results button to the page
+rootEl.append(searchEl);
+
 // Function to log the search input value
 function searchCurrentWeather(city) {
 
