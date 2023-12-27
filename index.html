@@ -22,15 +22,19 @@
                 <h2 id="form-heading" class="form-label">
                     Search by city:
                 </h2>
-                <form id="search-form">
-                    <input type="text" id="search-input" name="search" placeholder="City Name">
-                    <button class="btn btn-info">Search</button>
+                <form id="search-form" class="form">
+                    <div class="form-inline form-group">
+                        <div class="input-group">
+                            <input type="text" id="search-input" name="search" placeholder="City Name" aria-controls="today forecast"/>
+                            <button type="submit" class="btn search-button" id="search-button">Search</button>
+                        </div>
+                    </div>
                 </form>
             </aside>
         </div>
         <div id="root"></div>
     </div>
-   
+
 
     <!--
     <row>
