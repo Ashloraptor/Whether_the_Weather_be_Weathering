@@ -3,6 +3,7 @@ var searchForm = document.getElementById("search-form");
 var searchInput = document.getElementById("search-input");
 var rootEl = document.getElementById("root");
 var forecastContainer = document.getElementById("forecast-container");
+var searchedCity = document.getElementById("history");
 
 var weatherAPIRootUrl = "https://api.openweathermap.org/data/2.5/weather";
 var forecastAPIRootUrl = "https://api.openweathermap.org/data/2.5/forecast";
@@ -26,8 +27,17 @@ function searchCity(event) {
   var inputValue = cityName.value.trim();
   getCurrentWeather(inputValue);
   getForecast(inputValue);
+  addToHistory(inputValue);
+  //resets form back to clear
+  searchInput.value = '';
+}
 
-
+function addToHistory() {
+  //takes searchInput and creates a button
+  var inputValue = cityName.value.trim();
+  var cityHistory = document.createElement('button');
+  cityHistory.textContent = `${inputValue}`;
+  searchedCity.append(cityHistory);
 }
 
 function getCurrentWeather(city) {
@@ -53,7 +63,7 @@ function getForecast(city) {
   // Log the message to the console
   console.log("You searched forecast for: " + city);
 
-  //callback to search function (the one that does the fetch request). Include parameter "input value"
+  //callback to search function (the one that does the fetch request)
 
   fetch(forecastUrl)
     .then(function (response) {
@@ -61,7 +71,7 @@ function getForecast(city) {
     })
     .then(function (data) {
       console.log(data);
-      //  for (var i = 0; i < data.length; i++) {    }
+
       forecast(data);
     })
 }
@@ -73,7 +83,7 @@ function todayWeather(data) {
   var wind = data.wind.speed;
   var humidity = data.main.humidity;
 
-  //Create elements to later add to rootEl
+  //Create elements
   var tempEl = document.createElement('p');
   var windEl = document.createElement('p');
   var humidityEl = document.createElement('p');
@@ -126,6 +136,7 @@ function forecast(data) {
     }
   }
 }
+
 
 
 searchForm.addEventListener("submit", searchCity);
