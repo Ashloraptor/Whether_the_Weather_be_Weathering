@@ -5,9 +5,10 @@ var rootEl = document.getElementById("root");
 var forecastContainer = document.getElementById("forecast-container");
 var searchedCity = document.getElementById("history");
 
+var cityName = searchInput;
+
 var weatherAPIRootUrl = "https://api.openweathermap.org/data/2.5/weather";
 var forecastAPIRootUrl = "https://api.openweathermap.org/data/2.5/forecast";
-var cityName = searchInput;
 var APIKey = "&appid=d82bbecccc82c0f9568531048f1a15ce";
 var units = "&units=imperial";
 
@@ -44,7 +45,7 @@ function addToHistory() {
   //takes searchInput and creates a button
   var inputValue = cityName.value.trim();
   var cityHistory = document.createElement('button');
-  cityHistory.setAttribute('id', 'city-history');//get it to set a different value for each city searched
+  cityHistory.setAttribute('id', 'city-history');
   cityHistory.classList.add('history-btn', 'btn-history');
   cityHistory.value = `${inputValue}`;
   cityHistory.textContent = `${inputValue}`;
@@ -53,12 +54,11 @@ function addToHistory() {
 }
 
 //create function to search using cityHistory
-function searchCityHistory(city) {
+function searchCityHistory(event) {
   //event.preventDefault();
-  //find the variable to put in ()
-  //Need to extrapolate a value from the button and include it in the query search
-  //var inputValue = cityName.value.trim();
-  var city = document.getElementById('city-history').value
+
+  var city = event.target.value
+  console.log(event.target.value);
 
   console.log(city);
   //call on other functions using the event listener
@@ -133,8 +133,6 @@ function todayWeather(data) {
   
   var date = dayjs();
   heading.textContent = `${city} ${date}`;
-
-  
 
   //append
   rootEl.append(card)
