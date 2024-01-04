@@ -32,7 +32,7 @@ function searchCity(event) {
   } else {
 
     getCurrentWeather(inputValue);
-    getForecast(inputValue);
+    //getForecast(inputValue);
     addToHistory(inputValue);
     //resets form back to clear
     searchInput.value = '';
@@ -40,10 +40,12 @@ function searchCity(event) {
 }
 
 function addToHistory() {
+  
   //takes searchInput and creates a button
   var inputValue = cityName.value.trim();
   var cityHistory = document.createElement('button');
-  cityHistory.setAttribute('id', 'city-history');
+  cityHistory.setAttribute('id', 'city-history');//get it to set a different value for each city searched
+  cityHistory.classList.add('history-btn', 'btn-history');
   cityHistory.value = `${inputValue}`;
   cityHistory.textContent = `${inputValue}`;
   searchedCity.append(cityHistory);
@@ -51,15 +53,17 @@ function addToHistory() {
 }
 
 //create function to search using cityHistory
-function searchCityHistory(event) {
-  event.preventDefault();
+function searchCityHistory(city) {
+  //event.preventDefault();
   //find the variable to put in ()
   //Need to extrapolate a value from the button and include it in the query search
-  var inputValue = cityName.value.trim();
-  console.log(inputValue);
+  //var inputValue = cityName.value.trim();
+  var city = document.getElementById('city-history').value
+
+  console.log(city);
   //call on other functions using the event listener
-  //getCurrentWeather(inputValue);
-  //getForecast(inputValue);
+  getCurrentWeather(city);
+  getForecast(city);
 }
 
 function getCurrentWeather(city) {
@@ -118,8 +122,25 @@ function todayWeather(data) {
   windEl.textContent = `Wind Speed: ${wind}`;
   humidityEl.textContent = `Humidity: ${humidity}%`;
 
+  //make a card
+  var card = document.createElement('div');
+  var cardBody = document.createElement('div');
+  var heading = document.createElement('h2');
+  heading.setAttribute('class', 'h3 card-title');
+  card.setAttribute('classs', 'card');
+  cardBody.setAttribute('class', 'card-body');
+  var city = data.name;
+  
+  var date = dayjs();
+  heading.textContent = `${city} ${date}`;
+
+  
+
   //append
-  rootEl.append(tempEl, windEl, humidityEl);
+  rootEl.append(card)
+  card.append(cardBody);
+  cardBody.append(heading, tempEl, windEl, humidityEl);
+  
 }
 
 function forecast(data) {
