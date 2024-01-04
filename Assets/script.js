@@ -25,19 +25,41 @@ function searchCity(event) {
   event.preventDefault();
   // Retrieve the input value
   var inputValue = cityName.value.trim();
-  getCurrentWeather(inputValue);
-  getForecast(inputValue);
-  addToHistory(inputValue);
-  //resets form back to clear
-  searchInput.value = '';
+
+  //don't search if search is empty
+  if (inputValue == '') { 
+    return false;
+  } else {
+
+    getCurrentWeather(inputValue);
+    getForecast(inputValue);
+    addToHistory(inputValue);
+    //resets form back to clear
+    searchInput.value = '';
+  }
 }
 
 function addToHistory() {
   //takes searchInput and creates a button
   var inputValue = cityName.value.trim();
   var cityHistory = document.createElement('button');
+  cityHistory.setAttribute('id', 'city-history');
+  cityHistory.value = `${inputValue}`;
   cityHistory.textContent = `${inputValue}`;
   searchedCity.append(cityHistory);
+  cityHistory.addEventListener("click", searchCityHistory);
+}
+
+//create function to search using cityHistory
+function searchCityHistory(event) {
+  event.preventDefault();
+  //find the variable to put in ()
+  //Need to extrapolate a value from the button and include it in the query search
+  var inputValue = cityName.value.trim();
+  console.log(inputValue);
+  //call on other functions using the event listener
+  //getCurrentWeather(inputValue);
+  //getForecast(inputValue);
 }
 
 function getCurrentWeather(city) {
@@ -70,7 +92,7 @@ function getForecast(city) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      //console.log(data);
 
       forecast(data);
     })
