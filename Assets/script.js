@@ -28,12 +28,12 @@ function searchCity(event) {
   var inputValue = cityName.value.trim();
 
   //don't search if search is empty
-  if (inputValue == '') { 
+  if (inputValue == '') {
     return false;
   } else {
 
     getCurrentWeather(inputValue);
-    //getForecast(inputValue);
+    getForecast(inputValue);
     addToHistory(inputValue);
     //resets form back to clear
     searchInput.value = '';
@@ -41,7 +41,7 @@ function searchCity(event) {
 }
 
 function addToHistory() {
-  
+
   //takes searchInput and creates a button
   var inputValue = cityName.value.trim();
   var cityHistory = document.createElement('button');
@@ -57,10 +57,9 @@ function addToHistory() {
 function searchCityHistory(event) {
   //event.preventDefault();
 
-  var city = event.target.value
-  console.log(event.target.value);
-
-  console.log(city);
+  var city = event.target.value;
+  //console.log(event.target.value);
+  //console.log(city);
   //call on other functions using the event listener
   getCurrentWeather(city);
   getForecast(city);
@@ -103,6 +102,9 @@ function getForecast(city) {
 }
 
 function todayWeather(data) {
+
+          //delete previous  data
+        rootEl.innerHTML = '';
   console.log(data)
   //Store response data from fetch in variables
   var tempF = data.main.temp;
@@ -130,7 +132,7 @@ function todayWeather(data) {
   card.setAttribute('classs', 'card');
   cardBody.setAttribute('class', 'card-body');
   var city = data.name;
-  
+
   var date = dayjs();
   heading.textContent = `${city} ${date}`;
 
@@ -138,10 +140,12 @@ function todayWeather(data) {
   rootEl.append(card)
   card.append(cardBody);
   cardBody.append(heading, tempEl, windEl, humidityEl);
-  
+
 }
 
 function forecast(data) {
+  //delete previous  data
+  forecastContainer.innerHTML = '';
 
   var startDt = dayjs().add(1, 'day').startOf('day').unix();
   var endDt = dayjs().add(6, 'day').startOf('day').unix();
@@ -169,6 +173,7 @@ function forecast(data) {
         tempEl.textContent = `Temperature: ${tempF}°F`;
         windEl.textContent = `Wind Speed: ${wind}`;
         humidityEl.textContent = `Humidity: ${humidity}%`;
+
 
         //append
         forecastContainer.append(tempEl, windEl, humidityEl);
