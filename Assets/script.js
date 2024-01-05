@@ -4,13 +4,15 @@ var searchInput = document.getElementById("search-input");
 var rootEl = document.getElementById("root");
 var forecastContainer = document.getElementById("forecast-container");
 var searchedCity = document.getElementById("history");
-
+var weatherIcon = document.getElementById("weather-icon");
 var cityName = searchInput;
 
 var weatherAPIRootUrl = "https://api.openweathermap.org/data/2.5/weather";
 var forecastAPIRootUrl = "https://api.openweathermap.org/data/2.5/forecast";
 var APIKey = "&appid=d82bbecccc82c0f9568531048f1a15ce";
 var units = "&units=imperial";
+var iconRootUrl = "http://openweathermap.org/img/w/" 
+//var iconUrl = iconRootUrl + data.weather.icon +".png";
 
 
 
@@ -103,8 +105,8 @@ function getForecast(city) {
 
 function todayWeather(data) {
 
-          //delete previous  data
-        rootEl.innerHTML = '';
+  //delete previous  data
+  rootEl.innerHTML = '';
   console.log(data)
   //Store response data from fetch in variables
   var tempF = data.main.temp;
@@ -136,10 +138,19 @@ function todayWeather(data) {
   var date = dayjs();
   heading.textContent = `${city} ${date}`;
 
+  //icon
+  console.log(data.weather[0].icon);
+   var iconUrl = iconRootUrl + data.weather[0].icon +".png";
+   var icon = document.createElement('img');
+   icon.setAttribute('class', 'image');
+   weatherIcon.innerHTML = `<img src="${iconUrl}">`;
+
+   //icon = `${iconUrl}`
+
   //append
   rootEl.append(card)
   card.append(cardBody);
-  cardBody.append(heading, tempEl, windEl, humidityEl);
+  cardBody.append(heading, icon, tempEl, windEl, humidityEl);
 
 }
 
