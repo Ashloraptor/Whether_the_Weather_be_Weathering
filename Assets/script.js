@@ -5,13 +5,14 @@ var rootEl = document.getElementById("root");
 var forecastContainer = document.getElementById("forecast-container");
 var searchedCity = document.getElementById("history");
 var weatherIcon = document.getElementById("weather-icon");
+var weatherForecastIcon = document.getElementById("weather-forecast-icon");
 var cityName = searchInput;
 
 var weatherAPIRootUrl = "https://api.openweathermap.org/data/2.5/weather";
 var forecastAPIRootUrl = "https://api.openweathermap.org/data/2.5/forecast";
 var APIKey = "&appid=d82bbecccc82c0f9568531048f1a15ce";
 var units = "&units=imperial";
-var iconRootUrl = "http://openweathermap.org/img/w/" 
+var iconRootUrl = "http://openweathermap.org/img/w/"
 //var iconUrl = iconRootUrl + data.weather.icon +".png";
 
 
@@ -135,17 +136,15 @@ function todayWeather(data) {
   cardBody.setAttribute('class', 'card-body');
   var city = data.name;
 
-  var date = dayjs();
+  var date = dayjs().format("MMMM D");
   heading.textContent = `${city} ${date}`;
 
   //icon
-  console.log(data.weather[0].icon);
-   var iconUrl = iconRootUrl + data.weather[0].icon +".png";
-   var icon = document.createElement('img');
-   icon.setAttribute('class', 'image');
-   weatherIcon.innerHTML = `<img src="${iconUrl}">`;
-
-   //icon = `${iconUrl}`
+  console.log("Today's weather icon is" + data.weather[0].icon);
+  var iconUrl = iconRootUrl + data.weather[0].icon + ".png";
+  var icon = document.createElement('img');
+  icon.setAttribute('class', 'image');
+  icon.setAttribute('src', `${iconUrl}`);
 
   //append
   rootEl.append(card)
@@ -168,6 +167,9 @@ function forecast(data) {
       if (data.list[i].dt_txt.slice(11, 13) == "12") {
 
         //Store response data from fetch in variables
+        console.log(data);
+        console.log("The forecast icons include " + data.list[i].weather[0].icon);
+        var iconUrl = iconRootUrl + data.list[i].weather[0].icon + ".png";
         var tempF = data.list[i].main.temp;
         var wind = data.list[i].wind.speed;
         var humidity = data.list[i].main.humidity;
@@ -185,9 +187,27 @@ function forecast(data) {
         windEl.textContent = `Wind Speed: ${wind}`;
         humidityEl.textContent = `Humidity: ${humidity}%`;
 
+        //make a card
+        var card = document.createElement('div');
+        var cardBody = document.createElement('div');
+        var heading = document.createElement('h2');
+
+        heading.setAttribute('class', 'h3 card-title');
+        card.setAttribute('classs', 'card');
+        cardBody.setAttribute('class', 'card-body');
+
+        var date = dayjs().format("MMM D");
+        heading.textContent = `${date}`;
+
+        //icon
+        var icon = document.createElement('img');
+        icon.setAttribute('class', 'image');
+        icon.setAttribute('src', `${iconUrl}`);
 
         //append
-        forecastContainer.append(tempEl, windEl, humidityEl);
+        forecastContainer.append(card)
+        card.append(cardBody);
+        cardBody.append(heading, icon, tempEl, windEl, humidityEl);
 
       }
     }
