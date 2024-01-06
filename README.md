@@ -1,12 +1,10 @@
 # Whether_the_Weather_be_Weathering
 Utilizing weather APIs
 
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+Whether the weather be weathering, you can be in the know!
+Enter in the name of a city and click submit, and receive a response for not only today's weather, but the expected weather for the following 5 days. This version provides data for the temperature in Farenheit, the humidity levels, and the wind speed. The weather icon quickly reveals the general condition to expect.
+Each time a city is searched, a button is created, which can relaunch the weather search for that given location.
+
+<img width="437" alt="image" src="https://github.com/Ashloraptor/Whether_the_Weather_be_Weathering/assets/148083732/d41973ac-a2f5-4580-9461-2610f14ddaeb">
+
+<img width="293" alt="image" src="https://github.com/Ashloraptor/Whether_the_Weather_be_Weathering/assets/148083732/f7598c01-6c3c-415c-8bb4-31ec0a10fe12">

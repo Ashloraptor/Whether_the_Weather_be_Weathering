@@ -17,3 +17,35 @@ button {
     line-height: 1.15;
     margin: 0;
   }
+
+.card-body {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 10px;
+  flex: 0 0 300px;
+  box-shadow: 10px 10px 5px #606060;
+  margin: 20px;
+}
+
+.forecast-card {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 10px;
+  flex-direction: row;
+  box-shadow: 10px 10px 5px #606060;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+
+@media screen and (max-width: 768px) {
+  main,
+  .forecast-card {
+    flex-direction: column;
+  }
+}

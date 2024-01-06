@@ -132,7 +132,7 @@ function todayWeather(data) {
   var cardBody = document.createElement('div');
   var heading = document.createElement('h2');
   heading.setAttribute('class', 'h3 card-title');
-  card.setAttribute('classs', 'card');
+  card.setAttribute('class', 'card');
   cardBody.setAttribute('class', 'card-body');
   var city = data.name;
 
@@ -145,6 +145,7 @@ function todayWeather(data) {
   var icon = document.createElement('img');
   icon.setAttribute('class', 'image');
   icon.setAttribute('src', `${iconUrl}`);
+  icon.setAttribute('alt', `${data.weather[0].description}`)
 
   //append
   rootEl.append(card)
@@ -195,8 +196,9 @@ function forecast(data) {
         var heading = document.createElement('h2');
 
         heading.setAttribute('class', 'h3 card-title');
-        card.setAttribute('classs', 'card');
+        card.setAttribute('class', 'card');
         cardBody.setAttribute('class', 'card-body');
+        cardBody.setAttribute('class', 'forecast-card')
 
         //make time work
         // for (var j = 0; j < 6; j++) {
@@ -211,6 +213,7 @@ function forecast(data) {
         var icon = document.createElement('img');
         icon.setAttribute('class', 'image');
         icon.setAttribute('src', `${iconUrl}`);
+        icon.setAttribute('alt', `${data.list[i].weather[0].description}`)
 
         //append
         forecastContainer.append(card)
