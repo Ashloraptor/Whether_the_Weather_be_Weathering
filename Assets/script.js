@@ -166,13 +166,15 @@ function forecast(data) {
       //then returns only data captured at noon each day
       if (data.list[i].dt_txt.slice(11, 13) == "12") {
 
-        //Store response data from fetch in variables
         console.log(data);
+        //Store response data from fetch in variables
+
         console.log("The forecast icons include " + data.list[i].weather[0].icon);
         var iconUrl = iconRootUrl + data.list[i].weather[0].icon + ".png";
         var tempF = data.list[i].main.temp;
         var wind = data.list[i].wind.speed;
         var humidity = data.list[i].main.humidity;
+        var date = data.list[i].dt_txt;
 
         //Create elements to later add to rootEl
         var tempEl = document.createElement('p');
@@ -196,8 +198,14 @@ function forecast(data) {
         card.setAttribute('classs', 'card');
         cardBody.setAttribute('class', 'card-body');
 
-        var date = dayjs().format("MMM D");
-        heading.textContent = `${date}`;
+        //make time work
+        // for (var j = 0; j < 6; j++) {
+        //   var days = dayjs().add(j, 'days');
+        // }
+
+        // var date = dayjs().format("MMM D");//I know [i] goes in here somewhere
+
+         heading.textContent = `${date}`;
 
         //icon
         var icon = document.createElement('img');
